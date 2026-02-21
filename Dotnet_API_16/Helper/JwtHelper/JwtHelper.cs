@@ -16,7 +16,7 @@ namespace Dotnet_API_16.Helper.JwtHelper
                 new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Issue")!));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
 
             var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
 

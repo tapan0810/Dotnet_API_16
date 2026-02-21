@@ -7,5 +7,6 @@ namespace Dotnet_API_16.Data
     {
         public CompanyDbContext(DbContextOptions<CompanyDbContext> options) : base(options) { }
         public DbSet<Company> Companies =>Set<Company>();
+        public DbSet<User> Users => Set<User>();
     }
 }

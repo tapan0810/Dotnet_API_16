@@ -4,6 +4,6 @@
     {
         public int UserId { get; set; }
         public required string UserName { get; set; } = string.Empty;
-        public required string PasswordHash { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
     }
 }

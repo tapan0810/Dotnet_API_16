@@ -1,6 +1,6 @@
 ﻿using Dotnet_API_16.Entities.Dtos;
 using Dotnet_API_16.Entities.Models;
-using Dotnet_API_16.Services;
+using Dotnet_API_16.Services.CompanyService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +11,9 @@ namespace Dotnet_API_16.Controllers
     public class CompanyController(ICompanyService companyService) : ControllerBase
     {
         [HttpGet("GetAllCompanies")]
-        public async Task<ActionResult<List<GetAllCompaniesDto>>> GetAlLCompanies()
+        public async Task<ActionResult<List<GetAllCompaniesDto>>> GetAlLCompanies(int pageNumber =1,int pageSize=10)
         {
-            var companies = await companyService.GetAllCompaniesAsync();
-
-            if (companies is null || companies.Count == 0)
-            {
-                return NotFound("No Companies Found");
-            }
+            var companies = await companyService.GetAllCompaniesAsync(pageNumber,pageSize);
             return Ok(companies);
         }
 

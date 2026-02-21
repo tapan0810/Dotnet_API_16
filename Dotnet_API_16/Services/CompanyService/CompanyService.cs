@@ -3,7 +3,7 @@ using Dotnet_API_16.Entities.Dtos;
 using Dotnet_API_16.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dotnet_API_16.Services
+namespace Dotnet_API_16.Services.CompanyService
 {
     public class CompanyService(CompanyDbContext _context) : ICompanyService
     {
@@ -44,9 +44,12 @@ namespace Dotnet_API_16.Services
             return true;
         }
 
-        public Task<List<GetAllCompaniesDto>> GetAllCompaniesAsync()
+        public Task<List<GetAllCompaniesDto>> GetAllCompaniesAsync(int pageNumber , int pageSize)
         {
             var companies = _context.Companies
+                .OrderBy(x => x.CompanyId)
+                .Skip((pageNumber-1)*pageSize)
+                .Take(pageSize)
                 .Select(s => new GetAllCompaniesDto
                 {
                     CompanyName = s.CompanyName,

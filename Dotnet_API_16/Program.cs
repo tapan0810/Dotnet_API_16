@@ -1,5 +1,7 @@
 using Dotnet_API_16.Data;
-using Dotnet_API_16.Services;
+using Dotnet_API_16.Helper.JwtHelper;
+using Dotnet_API_16.Services.AuthService;
+using Dotnet_API_16.Services.CompanyService;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -12,6 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddScoped<IJwtHelper, JwtHelper>();
 
 builder.Services.AddDbContext<CompanyDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DeafultConnection")));
